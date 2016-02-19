@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :manifests
-  resources :definitions
   root 'splash#index'
 
+  resources :manifests
+  resources :definitions
   resources :considerations
   resources :recitals
   resources :preambles
