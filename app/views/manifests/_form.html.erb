@@ -1,0 +1,33 @@
+<%= form_for(@manifest) do |f| %>
+  <% if @manifest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@manifest.errors.count, "error") %> prohibited this manifest from being saved:</h2>
+
+      <ul>
+      <% @manifest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :party %><br>
+    <%= f.text_field :party %>
+  </div>
+  <div class="field">
+    <%= f.label :counter_party %><br>
+    <%= f.text_field :counter_party %>
+  </div>
+  <div class="field">
+    <%= f.label :document %><br>
+    <%= f.text_field :document %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @consideration.body %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @consideration.meta %>
+</p>
+
+<%= link_to 'Edit', edit_consideration_path(@consideration) %> |
+<%= link_to 'Back', considerations_path %>

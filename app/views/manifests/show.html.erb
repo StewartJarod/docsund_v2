@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @manifest.title %>
+</p>
+
+<p>
+  <strong>Party:</strong>
+  <%= @manifest.party %>
+</p>
+
+<p>
+  <strong>Counter party:</strong>
+  <%= @manifest.counter_party %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @manifest.document %>
+</p>
+
+<%= link_to 'Edit', edit_manifest_path(@manifest) %> |
+<%= link_to 'Back', manifests_path %>

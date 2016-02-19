@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @recital.body %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @recital.meta %>
+</p>
+
+<%= link_to 'Edit', edit_recital_path(@recital) %> |
+<%= link_to 'Back', recitals_path %>

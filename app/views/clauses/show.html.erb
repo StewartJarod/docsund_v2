@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @clause.body %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @clause.meta %>
+</p>
+
+<%= link_to 'Edit', edit_clause_path(@clause) %> |
+<%= link_to 'Back', clauses_path %>

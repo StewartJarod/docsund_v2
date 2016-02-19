@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @preamble.body %>
+</p>
+
+<p>
+  <strong>Meta:</strong>
+  <%= @preamble.meta %>
+</p>
+
+<%= link_to 'Edit', edit_preamble_path(@preamble) %> |
+<%= link_to 'Back', preambles_path %>

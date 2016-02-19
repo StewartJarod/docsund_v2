@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 
+  party: 
+  counter_party: 
+  document: 
+
+two:
+  title: 
+  party: 
+  counter_party: 
+  document: 
