@@ -77,10 +77,16 @@ GEM
       mongo (~> 2.1)
       origin (~> 2.2)
       tzinfo (>= 0.3.37)
+    mongoid-paranoia (1.3.0)
+      activesupport (~> 4.0)
+      mongoid (>= 4.0.0, <= 6.0.0)
     mongoid-rspec (3.0.0)
       mongoid (~> 5.0)
       rake
       rspec (~> 3.3)
+    mongoid-versioning (1.2.0)
+      activesupport (~> 4.0)
+      mongoid (>= 4.0.0, <= 6.0.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     origin (2.2.0)
@@ -174,7 +180,9 @@ PLATFORMS
 DEPENDENCIES
   jquery-rails
   mongoid (= 5.1.0)
+  mongoid-paranoia
   mongoid-rspec (= 3.0.0)
+  mongoid-versioning
   pry
   rails (= 4.2.5.1)
   rspec-rails (= 3.4.0)
