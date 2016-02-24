@@ -1,24 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div class="manifest" ng-controller="ManifestCtrl" >
+  <h1>
+    {{manifest.title}}
+  </h1>
+  <div class="buffer">
+    <content-item ng-repeat="item in manifest.document" content="item" data="data"
+        party="manifest.party" counterparty="manifest.counterparty"></content-item>
 
-<p>
-  <strong>Title:</strong>
-  <%= @manifest.title %>
-</p>
-
-<p>
-  <strong>Party:</strong>
-  <%= @manifest.party %>
-</p>
-
-<p>
-  <strong>Counter party:</strong>
-  <%= @manifest.counter_party %>
-</p>
-
-<p>
-  <strong>Document:</strong>
-  <%= @manifest.document %>
-</p>
-
-<%= link_to 'Edit', edit_manifest_path(@manifest) %> |
-<%= link_to 'Back', manifests_path %>
+    <%= link_to 'Edit', edit_manifest_path(@manifest) %> |
+    <%= link_to 'Back', manifests_path %>
+  </div>
+</div>

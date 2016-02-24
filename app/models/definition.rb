@@ -5,4 +5,6 @@ class Definition
 
   field :term, type: String
   field :body, type: String
+
+  validates_uniqueness_of :term
 end

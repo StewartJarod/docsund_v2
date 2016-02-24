@@ -8,6 +8,16 @@ class ManifestsController < ApplicationController
 
   # GET /manifests/1
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+        manifest: @manifest.as_json,
+        preamble: @manifest.preambles.group_by(&:id).as_json,
+        recital: @manifest.recitals.group_by(&:id).as_json,
+        consideration: @manifest.considerations.group_by(&:id).as_json,
+        clause: @manifest.clauses.group_by(&:id).as_json,
+      }}
+    end
   end
 
   # GET /manifests/new
@@ -53,6 +63,6 @@ class ManifestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def manifest_params
-      params.require(:manifest).permit(:title, :party, :counter_party, :document)
+      params.require(:manifest).permit(:title, :party, :counterparty, :document)
     end
 end

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>Body</th>
       <th>Meta</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @clauses.each do |clause| %>
       <tr>
+        <td><%= clause.title %></td>
         <td><%= clause.body %></td>
         <td><%= clause.meta %></td>
         <td><%= link_to 'Show', clause %></td>

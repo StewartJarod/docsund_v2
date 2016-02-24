@@ -53,6 +53,6 @@ class ClausesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def clause_params
-      params.require(:clause).permit(:body, :meta)
+      params.require(:clause).permit(:title, :body, :meta)
     end
 end

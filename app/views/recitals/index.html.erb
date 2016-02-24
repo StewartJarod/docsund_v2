@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Title</th>
       <th>Body</th>
       <th>Meta</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @recitals.each do |recital| %>
       <tr>
+        <td><%= recital.title %></td>
         <td><%= recital.body %></td>
         <td><%= recital.meta %></td>
         <td><%= link_to 'Show', recital %></td>

@@ -12,22 +12,63 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :party %><br>
+    <%= f.label :party %>
     <%= f.text_field :party %>
   </div>
   <div class="field">
-    <%= f.label :counter_party %><br>
-    <%= f.text_field :counter_party %>
+    <%= f.label :counterparty %>
+    <%= f.text_field :counterparty %>
   </div>
   <div class="field">
-    <%= f.label :document %><br>
-    <%= f.text_field :document %>
+    <%= f.label :document %>
+    <%= f.text_area :document %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script type="text/ng-template" id="nodes_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <a class="btn btn-success btn-xs" ng-if="node.sub_group && node.sub_group.length > 0" data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    {{data[node.type][node.id.$oid][0].body}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+        class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
+        class="glyphicon glyphicon-plus"></span></a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.sub_group" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.sub_group" ui-tree-node ng-include="'nodes_renderer.html'">
+    </li>
+  </ol>
+</script>
+
+<div class="manifest" ng-controller="EditManifestCtrl" >
+  <div class="row">
+    <div class="col-sm-12">
+      <button ng-click="expandAll()">Expand all</button>
+      <button ng-click="collapseAll()">Collapse all</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div ui-tree id="tree-root">
+        <ol ui-tree-nodes ng-model="manifest.document">
+          <li ng-repeat="node in manifest.document" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+        </ol>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <pre class="code">{{ manifest.document | json }}</pre>
+    </div>
+  </div>
+</div>

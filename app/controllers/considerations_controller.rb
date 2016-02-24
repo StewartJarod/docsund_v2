@@ -53,6 +53,6 @@ class ConsiderationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def consideration_params
-      params.require(:consideration).permit(:body, :meta)
+      params.require(:consideration).permit(:title, :body, :meta)
     end
 end

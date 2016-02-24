@@ -39,6 +39,7 @@ GEM
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bower-rails (0.10.0)
     bson (4.0.1)
     builder (3.2.2)
     coderay (1.1.0)
@@ -178,6 +179,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bower-rails
   jquery-rails
   mongoid (= 5.1.0)
   mongoid-paranoia

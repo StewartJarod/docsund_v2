@@ -4,6 +4,10 @@ class DefinitionsController < ApplicationController
   # GET /definitions
   def index
     @definitions = Definition.all
+    respond_to do |format|
+      format.html
+      format.json { render json: definitions_hash(@definitions) }
+    end
   end
 
   # GET /definitions/1
@@ -46,6 +50,10 @@ class DefinitionsController < ApplicationController
   end
 
   private
+    # Create a small defintions hash
+    def definitions_hash(defintions)
+      Hash[defintions.map { |i| [i.term, i.body] }]
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_definition
       @definition = Definition.find(params[:id])

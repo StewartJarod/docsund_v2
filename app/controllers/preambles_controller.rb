@@ -53,6 +53,6 @@ class PreamblesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def preamble_params
-      params.require(:preamble).permit(:body, :meta)
+      params.require(:preamble).permit(:title, :body, :meta)
     end
 end

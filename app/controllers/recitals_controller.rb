@@ -53,6 +53,6 @@ class RecitalsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def recital_params
-      params.require(:recital).permit(:body, :meta)
+      params.require(:recital).permit(:title, :body, :meta)
     end
 end
