@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= require angular-ui-tree/dist/angular-ui-tree
- *= require glyphicons-halflings/scss/glyphicons-halflings
+ *= require angular-bootstrap/ui-bootstrap-csp
  *= require_tree .
  *= require_self
  */

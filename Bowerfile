@@ -3,4 +3,4 @@
 
 asset 'angular', "1.5.0"
 asset 'angular-ui-tree'
-asset 'glyphicons-halflings'
+asset 'angular-bootstrap'

@@ -18,9 +18,14 @@ angular.module('app')
 
     $scope.newSubItem = function (scope) {
       var nodeData = scope.$modelValue;
+      if (!nodeData.sub_group) {
+        nodeData.sub_group = [];
+      }
       nodeData.sub_group.push({
-        title: nodeData.title + '.' + (nodeData.sub_group.length + 1),
-        body: 'new thing',
+        title: '',
+        type: '',
+        body: '',
+        id: '',
         sub_group: []
       });
     };

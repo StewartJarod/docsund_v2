@@ -1,4 +1,4 @@
-<%= form_for(@manifest) do |f| %>
+<!-- <%= form_for(@manifest) do |f| %>
   <% if @manifest.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@manifest.errors.count, "error") %> prohibited this manifest from being saved:</h2>
@@ -30,21 +30,52 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% end %> -->
 
 <script type="text/ng-template" id="nodes_renderer.html">
-  <div ui-tree-handle class="tree-node tree-node-content">
-    <a class="btn btn-success btn-xs" ng-if="node.sub_group && node.sub_group.length > 0" data-nodrag ng-click="toggle(this)"><span
-        class="glyphicon"
-        ng-class="{
+  <div class="tree-node">
+    <div class="pull-left tree-handle" ui-tree-handle>
+      <span class="glyphicon glyphicon-list"></span>
+    </div>
+    <div class="tree-node-content">
+      <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
+        <span class="glyphicon" ng-class="{
           'glyphicon-chevron-right': collapsed,
           'glyphicon-chevron-down': !collapsed
-        }"></span></a>
-    {{data[node.type][node.id.$oid][0].body}}
-    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-        class="glyphicon glyphicon-remove"></span></a>
-    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span
-        class="glyphicon glyphicon-plus"></span></a>
+          }">
+        </span>
+      </a>
+      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+      <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+
+      <label for="singleSelect">Type:</label>
+      <select name="singleSelect" ng-model="node.type" ng-disabled="node.id != ''">
+        <option value="clause">Clause</option>
+        <option value="recital">Recital</option>
+        <option value="preamble">Preamble</option>
+        <option value="consideration">Consideration</option>
+        <option value="">---Containters || Groups---</option>
+        <option value="signature">Signature Block</option>
+        <option value="terms">Terms</option>
+        <option value="section">Section</option>
+        <option value="recitals">Recitals</option>
+      </select></br>
+
+      <label for="title">Contract Title:</label>
+      <input name="title" type="text" ng-model="node.title"></input></br>
+
+      <div ng-If="node.type == 'signature'">
+        <label for="fields">Fields: </label>
+        <input name="fields" ng-model="node.fields" ng-list></br>
+      </div>
+
+      <div ng-If="node.type != 'signature'">
+        <label for="body">Body: </label>
+        <textarea name="body" type="text" ng-model="data[node.type][node.id.$oid][0].body"></textarea></br>
+        <label for="data_title">Data Title:</label>
+        <input name="data_title" type="text" ng-model="data[node.type][node.id.$oid][0].title"></input></br>
+      </div>
+    </div>
   </div>
   <ol ui-tree-nodes="" ng-model="node.sub_group" ng-class="{hidden: collapsed}">
     <li ng-repeat="node in node.sub_group" ui-tree-node ng-include="'nodes_renderer.html'">
@@ -52,7 +83,14 @@
   </ol>
 </script>
 
-<div class="manifest" ng-controller="EditManifestCtrl" >
+<div class="editManifest" ng-controller="EditManifestCtrl" >
+  <div class="row">
+    <div class="col-sm-12">
+      <p>title: <input type="text" ng-model="manifest.title"></input></p>
+      <p>party: <input type="text" ng-model="manifest.party"></input></p>
+      <p>counterparty: <input type="text" ng-model="manifest.counterparty"></input></p>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-12">
       <button ng-click="expandAll()">Expand all</button>
@@ -61,8 +99,8 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <div ui-tree id="tree-root">
-        <ol ui-tree-nodes ng-model="manifest.document">
+      <div ui-tree id="tree-root" data-clone-enabled="true">
+        <ol ui-tree-nodes="" ng-model="manifest.document">
           <li ng-repeat="node in manifest.document" ui-tree-node ng-include="'nodes_renderer.html'"></li>
         </ol>
       </div>

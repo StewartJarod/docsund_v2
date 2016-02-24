@@ -3,11 +3,9 @@
   <h1>
     {{manifest.title}}
   </h1>
-  <div class="buffer">
-    <content-item ng-repeat="item in manifest.document" content="item" data="data"
-        party="manifest.party" counterparty="manifest.counterparty"></content-item>
+  <content-item ng-repeat="item in manifest.document" content="item" data="data"
+      party="manifest.party" counterparty="manifest.counterparty"></content-item>
 
-    <%= link_to 'Edit', edit_manifest_path(@manifest) %> |
-    <%= link_to 'Back', manifests_path %>
-  </div>
+  <%= link_to 'Edit', edit_manifest_path(@manifest) %> |
+  <%= link_to 'Back', manifests_path %>
 </div>
