@@ -10,13 +10,7 @@ class ManifestsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: {
-        manifest: @manifest.as_json,
-        preamble: @manifest.preambles.group_by(&:id).as_json,
-        recital: @manifest.recitals.group_by(&:id).as_json,
-        consideration: @manifest.considerations.group_by(&:id).as_json,
-        clause: @manifest.clauses.group_by(&:id).as_json,
-      }}
+      format.json { render json: res_hash(@manifest) }
     end
   end
 
@@ -34,18 +28,30 @@ class ManifestsController < ApplicationController
     @manifest = Manifest.new(manifest_params)
 
     if @manifest.save
-      redirect_to @manifest, notice: 'Manifest was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to @manifest, notice: 'Manifest was successfully created.' }
+        format.json { render json: res_hash(@manifest), notice: 'Manifest was successfully created.' }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: res_hash(@manifest), status: :bad_request}
+      end
     end
   end
 
   # PATCH/PUT /manifests/1
   def update
     if @manifest.update(manifest_params)
-      redirect_to @manifest, notice: 'Manifest was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @manifest, notice: 'Manifest was successfully updated.' }
+        format.json { render json: res_hash(@manifest) }
+      end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.json { render json: res_hash(@manifest), status: :bad_request}
+      end
     end
   end
 
@@ -56,6 +62,15 @@ class ManifestsController < ApplicationController
   end
 
   private
+    def res_hash(manifest)
+      {
+        manifest: manifest.as_json,
+        preamble: manifest.preambles.group_by(&:id).as_json,
+        recital: manifest.recitals.group_by(&:id).as_json,
+        consideration: manifest.considerations.group_by(&:id).as_json,
+        clause: manifest.clauses.group_by(&:id).as_json,
+      }
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_manifest
       @manifest = Manifest.find(params[:id])
@@ -63,6 +78,12 @@ class ManifestsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def manifest_params
-      params.require(:manifest).permit(:title, :party, :counterparty, :document)
+      params.require(:manifest)
+            .permit(:title, :party, :counterparty)
+            .merge(document: params[:document]) # Hack to allow any nested data TODO fix this.
+            .merge(preamble_ids: params[:preamble_ids])
+            .merge(recital_ids: params[:recital_ids])
+            .merge(consideration_ids: params[:consideration_ids])
+            .merge(clause_ids: params[:clause_ids])
     end
 end

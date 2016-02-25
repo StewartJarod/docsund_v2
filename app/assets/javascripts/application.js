@@ -14,6 +14,8 @@
 //= require jquery_ujs
 // Bower files
 //= require angular/angular
+//= require angular-resource/angular-resource
+//= require angular-route/angular-route
 //= require angular-ui-tree/dist/angular-ui-tree
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require angular-bootstrap/ui-bootstrap

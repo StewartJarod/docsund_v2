@@ -24,7 +24,10 @@ class RecitalsController < ApplicationController
     @recital = Recital.new(recital_params)
 
     if @recital.save
-      redirect_to @recital, notice: 'Recital was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to @recital, notice: 'Recital was successfully created.' }
+        format.json { render json: { data: @recital.as_json } }
+      end
     else
       render :new
     end
@@ -33,7 +36,10 @@ class RecitalsController < ApplicationController
   # PATCH/PUT /recitals/1
   def update
     if @recital.update(recital_params)
-      redirect_to @recital, notice: 'Recital was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @recital, notice: 'Recital was successfully updated.' }
+        format.json { render json: { data: @recital.as_json } }
+      end
     else
       render :edit
     end

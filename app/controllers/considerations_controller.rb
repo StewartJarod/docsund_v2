@@ -24,7 +24,10 @@ class ConsiderationsController < ApplicationController
     @consideration = Consideration.new(consideration_params)
 
     if @consideration.save
-      redirect_to @consideration, notice: 'Consideration was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to @consideration, notice: 'Consideration was successfully created.' }
+        format.json { render json: { data: @consideration.as_json } }
+      end
     else
       render :new
     end
@@ -33,7 +36,10 @@ class ConsiderationsController < ApplicationController
   # PATCH/PUT /considerations/1
   def update
     if @consideration.update(consideration_params)
-      redirect_to @consideration, notice: 'Consideration was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @consideration, notice: 'Consideration was successfully updated.' }
+        format.json { render json: { data: @consideration.as_json } }
+      end
     else
       render :edit
     end

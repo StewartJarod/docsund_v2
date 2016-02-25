@@ -24,7 +24,10 @@ class ClausesController < ApplicationController
     @clause = Clause.new(clause_params)
 
     if @clause.save
-      redirect_to @clause, notice: 'Clause was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to @clause, notice: 'Clause was successfully created.' }
+        format.json { render json: { data: @clause.as_json } }
+      end
     else
       render :new
     end
@@ -33,7 +36,10 @@ class ClausesController < ApplicationController
   # PATCH/PUT /clauses/1
   def update
     if @clause.update(clause_params)
-      redirect_to @clause, notice: 'Clause was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @clause, notice: 'Clause was successfully updated.' }
+        format.json { render json: { data: @clause.as_json } }
+      end
     else
       render :edit
     end

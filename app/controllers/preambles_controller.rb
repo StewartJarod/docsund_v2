@@ -24,7 +24,10 @@ class PreamblesController < ApplicationController
     @preamble = Preamble.new(preamble_params)
 
     if @preamble.save
-      redirect_to @preamble, notice: 'Preamble was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to @preamble, notice: 'Preamble was successfully created.' }
+        format.json { render json: { data: @preamble.as_json } }
+      end
     else
       render :new
     end
@@ -33,7 +36,10 @@ class PreamblesController < ApplicationController
   # PATCH/PUT /preambles/1
   def update
     if @preamble.update(preamble_params)
-      redirect_to @preamble, notice: 'Preamble was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @preamble, notice: 'Preamble was successfully updated.' }
+        format.json { render json: { data: @preamble.as_json } }
+      end
     else
       render :edit
     end

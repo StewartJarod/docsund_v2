@@ -2,10 +2,9 @@
   "name": "dsl-generated dependencies",
   "dependencies": {
     "angular": "1.5.0",
+    "angular-resource": "latest",
+    "angular-route": "latest",
     "angular-ui-tree": "latest",
     "angular-bootstrap": "latest"
-  },
-  "resolutions": {
-    "angular": "1.5.0"
   }
 }

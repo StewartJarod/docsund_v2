@@ -31,6 +31,41 @@
     <%= f.submit %>
   </div>
 <% end %> -->
+<script type="text/ng-template" id="nodes_renderer1.html">
+  <div ui-tree-handle data-nodrag class="tree-node tree-node-content" ng-If="node.data">
+    <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
+    {{node.title}}
+  </div>
+  <div ng-If="!node.data">
+    <div ui-tree-handle class="tree-node tree-node-content">
+      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+      <label>Title: </label>{{node.title}}</br>
+      <label>Body: </label>{{node.body}}
+    </div>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.data" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.data" ui-tree-node ng-include="'nodes_renderer1.html'">
+    </li>
+  </ol>
+</script>
+
+<script type="text/ng-template" id="all_data_types.html">
+  <div ui-tree-handle class="tree-node tree-node-content" data-nodrag>
+    <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)"><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
+    {{node.title}}
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.data">
+    <li ng-repeat="node in node.data" ui-tree-node ng-include="'all_data.html'"></li>
+  </ol>
+</script>
+<script type="text/ng-template" id="all_data.html">
+  <div ui-tree-handle class="tree-node tree-node-content">
+    <label>Title: </label>{{node.title}}</br>
+    <label>Body: </label>{{node.body}}
+  </div>
+</script>
 
 <script type="text/ng-template" id="nodes_renderer.html">
   <div class="tree-node">
@@ -39,13 +74,9 @@
     </div>
     <div class="tree-node-content">
       <a class="btn btn-success btn-xs" data-nodrag ng-click="toggle(this)">
-        <span class="glyphicon" ng-class="{
-          'glyphicon-chevron-right': collapsed,
-          'glyphicon-chevron-down': !collapsed
-          }">
-        </span>
+        <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
       </a>
-      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
+      <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeMe(this)"><span class="glyphicon glyphicon-remove"></span></a>
       <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
 
       <label for="singleSelect">Type:</label>
@@ -70,10 +101,11 @@
       </div>
 
       <div ng-If="node.type != 'signature'">
-        <label for="body">Body: </label>
-        <textarea name="body" type="text" ng-model="data[node.type][node.id.$oid][0].body"></textarea></br>
+        <label for="body">Data Body: </label>
+        <textarea name="body" type="text" ng-model="data[node.type][node.id][0].body"></textarea></br>
         <label for="data_title">Data Title:</label>
-        <input name="data_title" type="text" ng-model="data[node.type][node.id.$oid][0].title"></input></br>
+        <input name="data_title" type="text" ng-model="data[node.type][node.id][0].title"></input></br>
+        <a class="btn btn-primary btn-xs" data-nodrag ng-click="updateOrSaveData(node)"><span class="glyphicon glyphicon-pencil"> Save Data</span></a>
       </div>
     </div>
   </div>
@@ -84,6 +116,11 @@
 </script>
 
 <div class="editManifest" ng-controller="EditManifestCtrl" >
+  <div class="row">
+    <div class="col-sm-12">
+      <button ng-click="saveManifest()">Save</button>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-12">
       <p>title: <input type="text" ng-model="manifest.title"></input></p>
@@ -98,15 +135,35 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6">
-      <div ui-tree id="tree-root" data-clone-enabled="true">
+    <div class="col-sm-8">
+      <div ui-tree="manifestTree" id="tree-root" data-clone-enabled="true">
         <ol ui-tree-nodes="" ng-model="manifest.document">
           <li ng-repeat="node in manifest.document" ui-tree-node ng-include="'nodes_renderer.html'"></li>
         </ol>
       </div>
     </div>
+    <div class="col-sm-4">
+      <h3>Data Sources</h3>
+      <div ui-tree="sourceTree" id="source-root" data-clone-enabled="true" data-nodrop-enabled="true">
+        <ol ui-tree-nodes="" ng-model="all_data">
+          <li ng-repeat="node in all_data" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+        </ol>
+      </div>
+
+      <!-- <div ui-tree id="sources" data-clone-enabled="true" data-nodrop-enabled="true">
+        <ol ui-tree-nodes="" ng-model="all_data">
+          <li ng-repeat="node in all_data" ui-tree-node ng-include="'all_data_types.html'">
+          </li>
+        </ol>
+      </div> -->
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-6">
       <pre class="code">{{ manifest.document | json }}</pre>
+    </div>
+    <div class="col-sm-6">
+      <pre class="code">{{ data | json }}</pre>
     </div>
   </div>
 </div>
