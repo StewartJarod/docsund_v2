@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html lang="en" ng-app="app">
 <head>
   <title><%= @page_title || 'Docsund' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,25 +11,37 @@
   <%= favicon_link_tag 'favicon.png' %>
 </head>
 <body>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="/">Docsund</a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-          </ul>
-        </div><!--/.nav-collapse -->
+        <a class="navbar-brand" href="/">Docsund</a>
       </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/manifests">Manifests</a></li>
+          <li><a href="/clauses">Clause</a></li>
+          <li><a href="/recitals">Recital</a></li>
+          <li><a href="/preambles">Clause</a></li>
+          <li><a href="/considerations">Considerations</a></li>
+          <li><a href="/definitions">Definitions</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
-  </div>
+  </nav>
 
   <div class="container">
-    <%= yield %>
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <%= yield %>
+      </div>
+    </div>
   </div>
 
 </body>
