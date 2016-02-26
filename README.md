@@ -18,6 +18,10 @@ Mostly just CRUD tests.
 run with rspec
 
 # Thoughts
+
+## Issues
+This is definitely a prototype. My resource factory doesn't handle promises like I want and will most likely require a page refresh when navigating to show or edit a manifest. But the core of the challenge is fullfilled by this quickly made app.
+
 ## JS testing woes
 JS unit testing frameworks take time to implement and decided my time was better spent on other aspects of the project. I would normally want to test the more logic intensive parts of the client side.
 
