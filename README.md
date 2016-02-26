@@ -9,7 +9,7 @@ mongodb
 ### install
 - ```git clone git@github.com:StewartJarod/docsund_v2.git && cd docsund_v2 && bundle```
 - ```npm install bower```
-- ```rake bower:install db:create db:seed```
+- ```rake bower:install db:create:all db:seed```
 - ```rails s```
 
 ## Tests
