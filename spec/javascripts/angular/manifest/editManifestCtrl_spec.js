@@ -7,7 +7,7 @@ describe('Edit Contract', function() {
 
   beforeEach(inject(function($rootScope, $controller, Model) {
     scope = $rootScope.$new();
-    ctrl = $controller('editManifestCtrl', {$scope: scope});
+    ctrl = $controller('EditManifestCtrl', {$scope: scope});
   }));
 
   it('should have an initial manifest state', function(){

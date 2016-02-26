@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('editManifestCtrl', function($scope, $window, $http, Model) {
+  .controller('EditManifestCtrl', function($scope, $window, $http, Model) {
     $scope.manifest = {};
     $scope.data = {};
 
