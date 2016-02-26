@@ -19,6 +19,7 @@ gem 'turbolinks'
 
 group :development, :test do
   gem 'pry'
+  gem "teaspoon-mocha"
 end
 
 group :test do

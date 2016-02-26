@@ -29,6 +29,8 @@ angular.module('app')
       });
     };
 
+    // Need to handle loading and initializing data better.
+    // Should be a better way to write the Model Factory
     $scope.fetchContent();
   }
 );

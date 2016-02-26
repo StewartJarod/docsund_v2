@@ -6,6 +6,7 @@
     "angular-resource": "latest",
     "angular-route": "latest",
     "angular-ui-tree": "latest",
-    "angular-bootstrap": "latest"
+    "angular-bootstrap": "latest",
+    "angular-mocks": "latest"
   }
 }
