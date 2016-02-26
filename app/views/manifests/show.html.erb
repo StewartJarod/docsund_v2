@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
-<div class="manifest" ng-controller="ManifestCtrl" >
+<div class="manifest" ng-controller="ManifestCtrl" data-definitions='{{data.definitions}}' >
   <h1>
     {{manifest.title}}
   </h1>
-  <content-item ng-repeat="item in manifest.document" content="item" data="data"
-      party="manifest.party" counterparty="manifest.counterparty"></content-item>
+  <content-item ng-repeat="item in manifest.document" content="item" data="data"></content-item>
 
   <%= link_to 'Edit', edit_manifest_path(@manifest) %> |
   <%= link_to 'Back', manifests_path %>

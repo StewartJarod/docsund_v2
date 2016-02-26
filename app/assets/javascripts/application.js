@@ -14,12 +14,12 @@
 //= require jquery_ujs
 // Bower files
 //= require angular/angular
+//= require angular-animate/angular-animate
 //= require angular-resource/angular-resource
 //= require angular-route/angular-route
 //= require angular-ui-tree/dist/angular-ui-tree
+//= require bootstrap-sprockets
 //= require angular-bootstrap/ui-bootstrap-tpls
 //= require angular-bootstrap/ui-bootstrap
-//
-//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .

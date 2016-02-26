@@ -69,6 +69,7 @@ class ManifestsController < ApplicationController
         recital: manifest.recitals.group_by(&:id).as_json,
         consideration: manifest.considerations.group_by(&:id).as_json,
         clause: manifest.clauses.group_by(&:id).as_json,
+        definitions: Hash[Definition.all.map { |i| [i.term, i.body] }], # for simplicity right now
       }
     end
     # Use callbacks to share common setup or constraints between actions.

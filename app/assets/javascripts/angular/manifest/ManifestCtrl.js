@@ -16,9 +16,11 @@ angular.module('app')
           recital: result.recital,
           consideration: result.consideration,
           clause: result.clause,
+          definitions: result.definitions,
         };
 
         Object.keys($scope.data).forEach(function(key) {
+          if (key == 'definitions') { return; }
           Object.keys($scope.data[key]).forEach(function(id) {
             $scope.data[key][id][0].body = $interpolate($scope.data[key][id][0].body)($scope.manifest);
             $scope.data[key][id][0].title = $interpolate($scope.data[key][id][0].title)($scope.manifest);
@@ -27,16 +29,6 @@ angular.module('app')
       });
     };
 
-    $scope.fetchDefinitions = function() {
-      $http.get('/definitions.json').then(function(result) {
-        $scope.definitions = result.data;
-        Object.keys($scope.definitions).forEach(function(key) {
-          $scope.definitions[key] = $interpolate($scope.definitions[key])($scope.manifest);
-        });
-      });
-    };
-
     $scope.fetchContent();
-    $scope.fetchDefinitions();
   }
 );
